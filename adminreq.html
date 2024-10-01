@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Requests Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;z
+        background-color: #f4f4f4;
+        height: 100vh;
+      }
+
+      .table-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 1200px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        table-layout: fixed;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        word-wrap: break-word;
+      }
+
+      th {
+        background-color: #f5f5f5;
+      }
+
+      .accept-btn,
+      .reject-btn {
+        padding: 10px 15px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .accept-btn {
+        background-color: #28a745;
+      }
+
+      .accept-btn:hover {
+        background-color: #218838;
+      }
+
+      .reject-btn {
+        background-color: #dc3545;
+      }
+
+      .reject-btn:hover {
+        background-color: #c82333;
+      }
+
+      .action-buttons {
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+      }
+
+      .search-container {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .search-container input {
+        padding: 10px;
+        width: 200px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+      }
+
+      .search-container button {
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .search-container button:hover {
+        background-color: #0056b3;
+      }
+
+      @media (max-width: 768px) {
+        th,
+        td {
+          font-size: 14px;
+        }
+
+        .accept-btn,
+        .reject-btn {
+          padding: 8px 12px;
+        }
+
+        .search-container input {
+          width: 150px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="table-container">
+      <h2>Pending Requests</h2>
+
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Enter Roll Number"
+          oninput="searchByRollNumber()"
+        />
+        <button onclick="searchByRollNumber()">Search</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Register Number</th>
+            <th>CGPA</th>
+            <th>Backlogs</th>
+            <th>Marksheet</th>
+            <th>Date of Clearance</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="requestTableBody">
+          <!-- Rows will be inserted dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      function acceptRequest(index) {
+        // Load requests from session storage
+        const requests = JSON.parse(sessionStorage.getItem("requests")) || [];
+
+        // Get the request to be accepted
+        const acceptedRequest = requests[index];
+
+        // Save the accepted request details into session storage for the academic page
+        sessionStorage.setItem(
+          "academicDetails",
+          JSON.stringify(acceptedRequest)
+        );
+
+        // Remove the request from the requests array and update session storage
+        requests.splice(index, 1);
+        sessionStorage.setItem("requests", JSON.stringify(requests));
+
+        // Optionally show a confirmation or refresh the page
+        alert(
+          "Request accepted. Changes will be reflected on the academic page."
+        );
+        loadRequests(); // Refresh the request table
+      }
+
+      function rejectRequest(index) {
+        // Load requests from session storage
+        const requests = JSON.parse(sessionStorage.getItem("requests")) || [];
+
+        // Remove the request from the requests array
+        requests.splice(index, 1);
+
+        // Update session storage
+        sessionStorage.setItem("requests", JSON.stringify(requests));
+
+        // Optionally show a confirmation or refresh the page
+        alert("Request rejected.");
+        loadRequests(); // Refresh the request table
+      }
+
+      function loadRequests() {
+        // Load requests from session storage
+        const requests = JSON.parse(sessionStorage.getItem("requests")) || [];
+
+        // Get the table element
+        const requestTable = document.getElementById("requestTableBody");
+
+        // Clear the table before repopulating it
+        requestTable.innerHTML = "";
+
+        // Loop through the requests and add them to the table
+        requests.forEach((request, index) => {
+          const row = `
+            <tr>
+              <td>${request.name}</td>
+              <td>${request.reg_no}</td>
+              <td>${request.cgpa}</td>
+              <td>${request.backlogs}</td>
+              <td>${request.marksheet}</td>
+              <td>${request.clearance_date}</td>
+              <td class="action-buttons">
+                <button class="accept-btn" onclick="acceptRequest(${index})">Accept</button>
+                <button class="reject-btn" onclick="rejectRequest(${index})">Reject</button>
+              </td>
+            </tr>
+          `;
+          requestTable.innerHTML += row;
+        });
+      }
+
+      function searchByRollNumber() {
+        // Get the search input value
+        const searchValue = document.getElementById("searchInput").value;
+
+        // Load requests from session storage
+        const requests = JSON.parse(sessionStorage.getItem("requests")) || [];
+
+        // Get the table element
+        const requestTable = document.getElementById("requestTableBody");
+
+        // Clear the table before repopulating it
+        requestTable.innerHTML = "";
+
+        // Filter requests by roll number
+        const filteredRequests = requests.filter((request) =>
+          request.reg_no.includes(searchValue)
+        );
+
+        // Display filtered requests
+        filteredRequests.forEach((request, index) => {
+          const row = `
+            <tr>
+              <td>${request.name}</td>
+              <td>${request.reg_no}</td>
+              <td>${request.cgpa}</td>
+              <td>${request.backlogs}</td>
+              <td>${request.marksheet}</td>
+              <td>${request.clearance_date}</td>
+              <td class="action-buttons">
+                <button class="accept-btn" onclick="acceptRequest(${index})">Accept</button>
+                <button class="reject-btn" onclick="rejectRequest(${index})">Reject</button>
+              </td>
+            </tr>
+          `;
+          requestTable.innerHTML += row;
+        });
+        // Example function to handle request acceptance
+        function acceptRequest(updatedDetails) {
+          // Assuming updatedDetails is an object with the new values
+          sessionStorage.setItem(
+            "academicDetails",
+            JSON.stringify(updatedDetails)
+          );
+
+          // Show success message, etc.
+          alert("Request accepted. Academic details updated.");
+        }
+
+        // Example usage when accepting a request
+        const updatedDetails = {
+          name: "Updated Student Name",
+          reg_no: "22s201",
+          cgpa: "9.7",
+          backlogs: 0,
+          current_backlog: 0,
+          clearance_date: "2024-05-01",
+        };
+        acceptRequest(updatedDetails);
+
+        // If no results are found, display a message
+        if (filteredRequests.length === 0) {
+          requestTable.innerHTML = `<tr><td colspan="7">No requests found for this roll number</td></tr>`;
+        }
+      }
+
+      // Load requests on page load
+      window.onload = loadRequests;
+    </script>
+  </body>
+</html>

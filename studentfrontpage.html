@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Portal</title>
+    <link rel="stylesheet" href="student frontpage.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      header {
+        width: 100%;
+        background-color: #ccc; /* Changed from blue to grey */
+        padding: 20px;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo img {
+        margin-left: 10px;
+        display: flex;
+        width: auto; /* Maintain aspect ratio */
+      }
+
+      .title {
+        margin: 0;
+        line-height: 0.01;
+      }
+
+      .links {
+        display: flex;
+        align-items: center;
+      }
+
+      .links p {
+        margin-left: 20px;
+      }
+
+      .links a {
+        text-decoration: none;
+        font-size: 1.2rem;
+        color: black;
+        display: inline-block;
+      }
+
+      .links a:hover {
+        color: black; /* Keep black on hover */
+      }
+
+      /* Profile section */
+      section {
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+      }
+
+      .infowithpic {
+        display: flex;
+        justify-content: center; /* Center items horizontally */
+        align-items: center; /* Center items vertically */
+        padding: 5%; /* Increase padding for a larger outer box */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 3% auto;
+        border: 1px solid #ccc; /* Optional: Add a border to define the box */
+        border-radius: 10px; /* Optional: Rounded corners for aesthetics */
+        width: 80%; /* Adjust the width as needed */
+        max-width: 600px; /* Optional: Set a maximum width */
+        background-color: #f9f9f9; /* Optional: Add a background color */
+      }
+
+      .profilepic {
+        width: 100px; /* Size of the profile picture */
+        height: 100px;
+        border-radius: 50%; /* Makes it circular */
+        margin-right: 20px; /* Space between picture and info */
+      }
+
+      .info {
+        flex-grow: 1;
+        max-width: 600px;
+      }
+
+      .info form table {
+        width: 100%;
+      }
+
+      .info form input {
+        width: 100%;
+        padding: 5px;
+        font-size: 1.1rem;
+        border: none;
+        border-bottom: 1px solid black;
+        background-color: white;
+      }
+
+      .btn1,
+      .btn2 {
+        margin-top: 3%;
+        display: flex;
+        justify-content: center; /* Center align buttons */
+        gap: 10px; /* Space between buttons */
+      }
+
+      .reportbtn {
+        margin-left: 0; /* Remove left margin to align properly */
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        padding: 8px 12px;
+        font-size: 14px;
+        transition: background-color 0.3s;
+      }
+
+      .reportbtn:hover {
+        background-color: darkgray;
+      }
+
+      .infobtn,
+      .editbtn,
+      .uploadbtn,
+      .viewbtn {
+        cursor: pointer;
+        width: 100px;
+        height: 30px;
+        background-color: rgba(194, 179, 179, 255);
+        border: none;
+        padding: 5px;
+        font-size: 12px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .infobtn:hover,
+      .editbtn:hover,
+      .uploadbtn:hover,
+      .viewbtn:hover {
+        background-color: rgba(160, 160, 160, 0.7);
+      }
+
+      #fileNameDisplay {
+        margin-top: 10px;
+        font-size: 1.1rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="college.png" width="100px;" />
+          <div class="title">
+            <h1>Zen Stud</h1>
+            <h4>A Student Portal</h4>
+          </div>
+        </div>
+        <div class="links">
+          <p class="profile-link"><a href="#">Profile</a></p>
+          <p class="link"><a href="adminlogin.html">Logout</a></p>
+        </div>
+      </nav>
+    </header>
+
+    <section>
+      <div class="infowithpic">
+        <img class="profilepic" src="cartoon.jpg" alt="profile pic" />
+        <div class="info">
+          <form>
+            <table>
+              <tr>
+                <td>NAME :</td>
+                <td>
+                  <input type="text" value="student1" readonly />
+                </td>
+              </tr>
+              <tr>
+                <td>ROLL NO :</td>
+                <td>
+                  <input type="text" value="22s201" readonly />
+                </td>
+              </tr>
+              <tr>
+                <td>DEGREE :</td>
+                <td>
+                  <input type="text" value="BE CSE" readonly />
+                </td>
+              </tr>
+              <tr>
+                <td>COLLEGE :</td>
+                <td>
+                  <input
+                    type="text"
+                    value="PSG College of Technology"
+                    readonly
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>CURRENT SEMESTER :</td>
+                <td>
+                  <input type="number" value="2" readonly />
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+
+      <a href="report.html">
+        <button class="reportbtn">View full report</button>
+      </a>
+
+      <div class="btn1">
+        <a href="personal.html">
+          <button class="infobtn">Personal info</button>
+        </a>
+        <a href="academic.html">
+          <button class="infobtn">Academic info</button>
+        </a>
+        <a href="placement.html">
+          <button class="infobtn">Placement drives</button>
+        </a>
+      </div>
+
+      <div class="btn2">
+        <input type="file" id="resumeInput" style="display: none" />
+        <button
+          class="editbtn"
+          onclick="document.getElementById('resumeInput').click();"
+        >
+          Add resume
+        </button>
+        <button class="uploadbtn" onclick="uploadFile()">Upload</button>
+        <button class="viewbtn" onclick="viewResume()">View Resume</button>
+      </div>
+
+      <div id="fileNameDisplay"></div>
+
+      <script>
+        let uploadedFile = null;
+
+        function uploadFile() {
+          const fileInput = document.getElementById("resumeInput");
+          const fileNameDisplay = document.getElementById("fileNameDisplay");
+
+          if (fileInput.files.length > 0) {
+            uploadedFile = fileInput.files[0];
+            fileNameDisplay.textContent = `File uploaded: ${uploadedFile.name}`;
+          } else {
+            alert("No file selected!");
+          }
+        }
+
+        function viewResume() {
+          if (uploadedFile) {
+            const fileURL = URL.createObjectURL(uploadedFile);
+            window.open(fileURL);
+          } else {
+            alert("No resume uploaded!");
+          }
+        }
+      </script>
+    </section>
+  </body>
+</html>

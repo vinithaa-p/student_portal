@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academic Page</title>
+    <style>
+      * {
+        font-family: "Lucida Sans", Geneva, Verdana, sans-serif;
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+        align-items: center;
+        color: black;
+        background-color: rgb(192, 192, 192);
+        box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px,
+          rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+          rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+      }
+
+      .links {
+        display: flex;
+        column-gap: 20px;
+        margin-right: 30px;
+        align-items: center;
+      }
+
+      .links a {
+        text-decoration: underline;
+        color: black;
+        cursor: pointer;
+      }
+
+      .links a:hover {
+        text-decoration: underline;
+        color: black;
+        cursor: pointer;
+      }
+
+      .logo {
+        display: flex;
+        height: 80px;
+      }
+
+      .title {
+        margin-left: 30px;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .profile-link {
+        background-color: white;
+        z-index: 1;
+        padding: 25px;
+        margin-top: -10px;
+        padding-top: 50px;
+        margin-bottom: -10px;
+        align-items: center;
+        padding-bottom: 40px;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .sidebar {
+        width: 200px;
+        background-color: #f5f5f5;
+        padding: 20px;
+      }
+
+      .sidebar button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #ddd;
+        border: none;
+        text-align: left;
+      }
+
+      .sidebar button.active {
+        background-color: #5b5a5a;
+      }
+
+      .contents {
+        flex: 1;
+        padding: 20px;
+        margin-left: 20px;
+      }
+
+      table {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      td {
+        padding: 8px;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid black;
+      }
+
+      input[disabled] {
+        background-color: #f0f0f0;
+        color: #666;
+      }
+
+      .footer {
+        margin-top: 20px;
+      }
+
+      .message {
+        color: green;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="college.png" width="100px;" alt="College Logo" />
+        <div class="title">
+          <h3>Zen Stud - A Student Portal</h3>
+        </div>
+      </div>
+      <div class="links">
+        <p class="profile-link"><a href="">Profile</a></p>
+        <p class="link"><a href="adminlogin.html">Logout</a></p>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="sidebar">
+        <a href="academic.html"><button>Semester 1</button></a>
+        <a href="sem2.html"><button>Semester 2</button></a>
+        <a href="sem3.html"><button class="active">Semester 3</button></a>
+        <a href="sem4.html"><button>Semester 4</button></a>
+        <a href="sem5.html"><button>Semester 5</button></a>
+        <a href="sem6.html"><button>Semester 6</button></a>
+        <a href="sem7.html"><button>Semester 7</button></a>
+        <a href="sem8.html"><button>Semester 8</button></a>
+      </div>
+
+      <a href="studentfrontpage.html" class="back">back</a>
+
+      <div class="contents">
+        <form
+          action="adminreq.html"
+          method="POST"
+          enctype="multipart/form-data"
+          id="academicForm"
+          onsubmit="return handleSubmit(event);"
+        >
+          <table>
+            <tr>
+              <td>Name:</td>
+              <td>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value="student1"
+                  disabled
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Register number:</td>
+              <td>
+                <input
+                  type="text"
+                  id="reg_no"
+                  name="reg_no"
+                  value="22s201"
+                  disabled
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>CGPA:</td>
+              <td>
+                <input type="text" id="cgpa" name="cgpa" value="8.9" disabled />
+              </td>
+            </tr>
+            <tr>
+              <td>Number of backlogs:</td>
+              <td>
+                <input
+                  type="number"
+                  id="backlogs"
+                  name="backlogs"
+                  value="2"
+                  disabled
+                  onchange="toggleDateField()"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Current backlog:</td>
+              <td>
+                <input
+                  type="number"
+                  id="current_backlog"
+                  name="current_backlog"
+                  value="1"
+                  disabled
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Marksheet:</td>
+              <td>
+                <input
+                  type="file"
+                  id="marksheet"
+                  name="marksheet"
+                  accept=".pdf,.doc,.docx"
+                  disabled
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Date of clearance of backlogs:</td>
+              <td>
+                <input
+                  type="date"
+                  id="date_of_clearance_of_backlog"
+                  name="date_of_clearance"
+                  value="2023-02-15"
+                  disabled
+                />
+              </td>
+            </tr>
+          </table>
+
+          <div class="footer">
+            <button type="button" id="editButton" onclick="enableEdit()">
+              Edit
+            </button>
+            <button type="submit" id="reqButton" disabled>
+              Request Change
+            </button>
+            <button
+              type="button"
+              id="discardButton"
+              disabled
+              onclick="discardChanges()"
+            >
+              Discard
+            </button>
+          </div>
+          <div class="message" id="successMessage" style="display: none">
+            Your request has been successfully sent!
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const originalData = {
+        name: document.getElementById("name").value,
+        reg_no: document.getElementById("reg_no").value,
+        cgpa: document.getElementById("cgpa").value,
+        backlogs: document.getElementById("backlogs").value,
+        current_backlog: document.getElementById("current_backlog").value,
+        marksheet: document.getElementById("marksheet").value,
+        date_of_clearance: document.getElementById(
+          "date_of_clearance_of_backlog"
+        ).value,
+      };
+
+      function enableEdit() {
+        // Enable fields for editing
+        document.getElementById("name").disabled = false;
+        document.getElementById("cgpa").disabled = false;
+        document.getElementById("backlogs").disabled = false;
+        document.getElementById("current_backlog").disabled = false;
+        document.getElementById("marksheet").disabled = false;
+
+        // Allow editing the date of clearance if there are backlogs
+        const backlogs = document.getElementById("backlogs").value;
+        document.getElementById(
+          "date_of_clearance_of_backlog"
+        ).disabled = false; // Always enable date field when editing
+
+        document.getElementById("editButton").disabled = true;
+        document.getElementById("reqButton").disabled = false;
+        document.getElementById("discardButton").disabled = false;
+      }
+
+      function discardChanges() {
+        // Reset form fields
+        document.getElementById("name").value = originalData.name;
+        document.getElementById("cgpa").value = originalData.cgpa;
+        document.getElementById("backlogs").value = originalData.backlogs;
+        document.getElementById("current_backlog").value =
+          originalData.current_backlog;
+        document.getElementById("marksheet").value = originalData.marksheet;
+        document.getElementById("date_of_clearance_of_backlog").value =
+          originalData.date_of_clearance;
+
+        // Disable fields and buttons
+        document.getElementById("name").disabled = true;
+        document.getElementById("cgpa").disabled = true;
+        document.getElementById("backlogs").disabled = true;
+        document.getElementById("current_backlog").disabled = true;
+        document.getElementById("marksheet").disabled = true;
+        document.getElementById("date_of_clearance_of_backlog").disabled = true;
+
+        document.getElementById("editButton").disabled = false;
+        document.getElementById("reqButton").disabled = true;
+        document.getElementById("discardButton").disabled = true;
+
+        // Hide success message if visible
+        document.getElementById("successMessage").style.display = "none";
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get the number of backlogs
+        const backlogs = document.getElementById("backlogs").value;
+
+        // Clear the date of clearance input if there are no backlogs
+        if (backlogs == 0) {
+          document.getElementById("date_of_clearance_of_backlog").value = ""; // Clear the date
+        }
+
+        // Display success message
+        document.getElementById("successMessage").style.display = "block";
+
+        // Optionally, you could add logic to submit the form data via AJAX or another method here
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zen Stud</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMkV22F8s1eZx8Hn/1X8p5F5Z/KK/q2Pkq9N1"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="studentlogin.css" />
+  </head>
+
+  <body>
+    <div class="logo">
+      <img src="college.png" width="150px;" />
+      <div class="title">
+        <h1>Zen Stud</h1>
+        <h3>A Student Portal</h3>
+      </div>
+    </div>
+    <hr />
+    <div class="login">
+      <div class="admin-login">
+        <h1>STUDENT LOGIN</h1>
+      </div>
+      <a href="adminlogin.html" class="back">back</a>
+      <!-- Moved Back Link Here -->
+      <div class="details">
+        <form id="student-login-form">
+          <table>
+            <tr id="student-username">
+              <td><h2>Username</h2></td>
+              <td><input type="text" id="student-username-input" /></td>
+            </tr>
+            <tr id="student-password">
+              <td><h2>Password</h2></td>
+              <td>
+                <input type="password" id="student-password-input" />
+                <i
+                  class="fa fa-eye-slash"
+                  id="toggle-student-password"
+                  style="cursor: pointer"
+                ></i>
+              </td>
+            </tr>
+          </table>
+          <p class="forgot-pass"><a href="#">Forgot password?</a></p>
+        </form>
+      </div>
+      <button id="student-login-button" class="login-button">LOGIN</button>
+      <p class="error-message" id="student-error-message"></p>
+      <!-- Error message placeholder -->
+
+      <script>
+        const validStudentUsername = "student"; // Valid username
+        const validStudentPassword = "student123"; // Valid password
+
+        // Validate login button
+        document
+          .getElementById("student-login-button")
+          .addEventListener("click", function () {
+            // Get input values
+            const usernameInput = document.getElementById(
+              "student-username-input"
+            ).value; // Use correct ID
+            const passwordInput = document.getElementById(
+              "student-password-input"
+            ).value; // Use correct ID
+
+            // Clear previous error messages
+            document.getElementById("student-error-message").textContent = "";
+
+            // Validate credentials
+            if (
+              usernameInput === validStudentUsername &&
+              passwordInput === validStudentPassword
+            ) {
+              window.location.href = "studentfrontpage.html"; // Redirect if valid
+            } else {
+              document.getElementById("student-error-message").textContent =
+                "Invalid username or password!"; // Show error message
+            }
+          });
+
+        // Toggle password visibility
+        const toggleStudentPassword = document.getElementById(
+          "toggle-student-password"
+        );
+        const studentPasswordInput = document.getElementById(
+          "student-password-input"
+        );
+
+        toggleStudentPassword.addEventListener("click", function () {
+          const type =
+            studentPasswordInput.getAttribute("type") === "password"
+              ? "text"
+              : "password";
+          studentPasswordInput.setAttribute("type", type);
+          this.classList.toggle("fa-eye");
+          this.classList.toggle("fa-eye-slash");
+        });
+      </script>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; /* Font family */
+}
+
+body {
+    background-color: #f9f9f9; /* Light background for contrast */
+    color: #333; /* Dark text for readability */
+}
+
+/* Report container styling */
+.report-container {
+    padding: 30px;
+    max-width: 800px;
+    margin: 40px auto; /* Centering with margin */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 8px; /* Slightly more rounded corners */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: white; /* White background for report */
+}
+
+/* Heading styles */
+h1 {
+    text-align: center;
+    margin-bottom: 20px; /* Space below heading */
+   /* Green color for headings */
+    font-size: 2.5em; /* Increased font size for main title */
+    font-weight: bold; /* Bold weight */
+    text-transform: uppercase; /* Uppercase letters for emphasis */
+}
+
+/* Subheading styles */
+h2 {
+    font-size: 1.8em; /* Font size for subheadings */
+    color: #333; /* Dark color for subheadings */
+    margin: 20px 0; /* Space above and below subheadings */
+    border-bottom: 2px solid ; /* Underline for subheadings */
+    padding-bottom: 5px; /* Space between text and underline */
+}
+
+/* Table styling */
+table {
+    width: 100%; /* Full width table */
+    border-collapse: collapse; /* Collapse borders */
+    margin-top: 20px; /* Space above the table */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Shadow for table */
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Ensures child elements are contained within rounded corners */
+}
+
+/* Table header and cell styling */
+th, td {
+    padding: 15px; /* Increased padding for cells */
+    border: 1px solid #ddd; /* Light border for cells */
+    text-align: left; /* Left align text */
+}
+
+th {
+    background-color: #f4f4f4; /* Light background for header */
+    font-weight: bold; /* Bold text for header */
+}
+
+/* Footer styling */
+.footer {
+    text-align: center;
+    margin-top: 30px; /* Space above footer */
+    font-size: 0.9em; /* Slightly smaller text */
+    color: #777; /* Gray color for footer text */
+}
+
+/* Print button styling */
+.print-button {
+    display: block; /* Block display */
+    margin: 20px auto; /* Centered with auto margins */
+    padding: 10px 15px; /* Padding for button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    font-size: 1em; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.print-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}

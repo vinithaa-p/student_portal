@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Personal information</title>
+    <link rel="stylesheet" href="personal.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="college.png" width="100px;" />
+          <div class="title">
+            <h1>Zen Stud</h1>
+            <h4>A Student Portal</h4>
+          </div>
+        </div>
+        <div class="links">
+          <!-- Profile link always visible -->
+          <p class="profile-link"><a href="#">Profile</a></p>
+          <p class="link"><a href="adminlogin.html">Logout</a></p>
+        </div>
+      </nav>
+    </header>
+    <a href="studentfrontpage.html" class="back">back</a>
+    <div class="personal-container">
+      <center>
+        <form id="personalInfoForm">
+          <table>
+            <tr>
+              <td>Name:</td>
+              <td>
+                <input type="text" id="name" value="student1" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Register number:</td>
+              <td>
+                <input type="text" id="regNo" value="22s201" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Course name (full form):</td>
+              <td>
+                <input type="text" id="courseName" value="CSE" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Branch (full form):</td>
+              <td>
+                <input type="text" id="branch" value="CSE" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Batch:</td>
+              <td>
+                <input type="text" id="batch" value="G1" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Phone number:</td>
+              <td>
+                <input type="number" id="phone" value="9876543210" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Email ID:</td>
+              <td>
+                <input
+                  type="text"
+                  id="email"
+                  value="22s201@gmail.com"
+                  readonly
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Alternate email ID:</td>
+              <td>
+                <input
+                  type="text"
+                  id="altEmail"
+                  value="student1@gmail.com"
+                  readonly
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Gender:</td>
+              <td>
+                <input type="text" id="gender" value="male" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Date of birth:</td>
+              <td>
+                <input type="text" id="dob" value="31.12.2004" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td>Select resident:</td>
+              <td class="resident-group">
+                <input
+                  type="radio"
+                  id="days-scholar"
+                  name="resident"
+                  value="days-scholar"
+                />
+                <label for="days-scholar">Day scholar</label>
+
+                <input
+                  type="radio"
+                  id="hosteller"
+                  name="resident"
+                  value="hosteller"
+                />
+                <label for="hosteller">Hosteller</label>
+              </td>
+            </tr>
+          </table>
+        </form>
+        <button onclick="enableEditing()">Edit</button>
+        <button onclick="saveChanges()">Save changes</button>
+        <button onclick="discardChanges()">Discard changes</button>
+      </center>
+    </div>
+
+    <script>
+      // Load saved data from localStorage on page load
+      window.onload = function () {
+        const fields = [
+          "name",
+          "regNo",
+          "courseName",
+          "branch",
+          "batch",
+          "phone",
+          "email",
+          "altEmail",
+          "gender",
+          "dob",
+        ];
+        fields.forEach((field) => {
+          const savedValue = localStorage.getItem(field);
+          if (savedValue) {
+            document.getElementById(field).value = savedValue;
+          }
+        });
+
+        const savedResident = localStorage.getItem("resident");
+        if (savedResident) {
+          document.getElementById(savedResident).checked = true;
+        }
+      };
+
+      // Enable editing of form fields
+      function enableEditing() {
+        document
+          .querySelectorAll('input[type="text"], input[type="number"]')
+          .forEach((input) => {
+            input.removeAttribute("readonly");
+          });
+      }
+
+      // Save the form data and resident choice in localStorage
+      function saveChanges() {
+        const fields = [
+          "name",
+          "regNo",
+          "courseName",
+          "branch",
+          "batch",
+          "phone",
+          "email",
+          "altEmail",
+          "gender",
+          "dob",
+        ];
+        fields.forEach((field) => {
+          const value = document.getElementById(field).value;
+          localStorage.setItem(field, value);
+        });
+
+        const residentValue = document.querySelector(
+          'input[name="resident"]:checked'
+        ).value;
+        localStorage.setItem("resident", residentValue);
+        alert("Changes saved!");
+      }
+
+      // Discard changes (reloads the page to original state)
+      function discardChanges() {
+        location.reload();
+      }
+    </script>
+  </body>
+</html>

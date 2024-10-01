@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zen Stud</title>
+    <link rel="stylesheet" href="admin login.css" />
+  </head>
+
+  <body>
+    <div class="logo">
+      <img src="college.png" width="150px;" />
+      <div class="title">
+        <h1>Zen Stud</h1>
+        <h3>A Student Portal</h3>
+      </div>
+    </div>
+    <hr />
+    <div class="login">
+      <div class="admin-login">
+        <h1>ADMIN LOGIN</h1>
+        <div class="link">
+          <h2>Are you student?</h2>
+          <a href="studentlogin.html">Click here</a>
+        </div>
+      </div>
+      <div clas="details">
+        <form id="login-form">
+          <table>
+            <tr id="admin-username">
+              <td><h2>Username</h2></td>
+              <td><input type="text" id="admin-username-input" /></td>
+            </tr>
+
+            <tr id="admin-password">
+              <td><h2>Password</h2></td>
+              <td>
+                <input type="password" id="admin-password-input" />
+                <i class="fa fa-eye-slash" id="toggle-password"></i>
+              </td>
+            </tr>
+          </table>
+          <p class="forgot-pass"><a href="#">Forgot password?</a></p>
+          <button type="button" id="login-button" onclick="validateLogin()">
+            LOGIN
+          </button>
+
+          <p class="error-message" id="error-message"></p>
+        </form>
+      </div>
+    </div>
+    <script>
+      function validateLogin() {
+        // Dummy credentials
+        const validUsername = "admin";
+        const validPassword = "admin123";
+
+        // Get the input values
+        const usernameInput = document.getElementById(
+          "admin-username-input"
+        ).value;
+        const passwordInput = document.getElementById(
+          "admin-password-input"
+        ).value;
+
+        // Clear any previous error message
+        document.getElementById("error-message").textContent = "";
+
+        // Check if the credentials are correct
+        if (
+          usernameInput === validUsername &&
+          passwordInput === validPassword
+        ) {
+          window.location.href = "adminreq.html"; // Redirect to admin front page if credentials are valid
+        } else {
+          // Stay on the same page and show error message
+          document.getElementById("error-message").textContent =
+            "Invalid username or password!";
+        }
+      }
+
+      const togglePassword = document.getElementById("toggle-password");
+      const passwordInput = document.getElementById("admin-password-input");
+
+      togglePassword.addEventListener("click", function () {
+        // Toggle the type attribute of the password input
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+
+        // Toggle the eye slash icon
+        this.classList.toggle("fa-eye");
+        this.classList.toggle("fa-eye-slash");
+      });
+    </script>
+  </body>
+</html>
